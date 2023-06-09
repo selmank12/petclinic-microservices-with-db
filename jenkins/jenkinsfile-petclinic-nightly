@@ -156,8 +156,8 @@ pipeline {
                 """
             echo 'Tear down the Kubernetes Cluster'
             sh """
-            cd infrastructure/
-            cd dev-k8s-terraform/
+            cd infrastructure
+            cd dev-k8s-terraform
             terraform destroy -auto-approve -no-color
             """
             echo "Delete existing key pair using AWS CLI"
