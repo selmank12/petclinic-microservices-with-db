@@ -3,15 +3,15 @@ provider "aws" {
 }
 
 variable "sec-gr-mutual" {
-  default = "petclinic-k8s-mutual-sec-group"
+  default = "petclinic-k8s-mutual-sec-group-se"
 }
 
 variable "sec-gr-k8s-master" {
-  default = "petclinic-k8s-master-sec-group"
+  default = "petclinic-k8s-master-sec-group-se"
 }
 
 variable "sec-gr-k8s-worker" {
-  default = "petclinic-k8s-worker-sec-group"
+  default = "petclinic-k8s-worker-sec-group-se"
 }
 
 data "aws_vpc" "name" {
@@ -127,7 +127,7 @@ resource "aws_security_group" "petclinic-kube-master-sg" {
 }
 
 resource "aws_iam_role" "petclinic-master-server-s3-role" {
-  name               = "petclinic-master-server-role"
+  name               = "petclinic-master-server-role-se"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -148,7 +148,7 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "petclinic-master-server-profile" {
-  name = "petclinic-master-server-profile"
+  name = "petclinic-master-server-profile-se"
   role = aws_iam_role.petclinic-master-server-s3-role.name
 }
 
@@ -161,7 +161,7 @@ resource "aws_instance" "kube-master" {
     subnet_id = "subnet-0eafd2692a2da66c5"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "kube-master"
+        Name = "selman-kube-master"
         Project = "tera-kube-ans"
         Role = "master"
         Id = "1"
@@ -177,7 +177,7 @@ resource "aws_instance" "worker-1" {
     subnet_id = "subnet-0eafd2692a2da66c5"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-1"
+        Name = "selman-worker-1"
         Project = "tera-kube-ans"
         Role = "worker"
         Id = "1"
@@ -193,7 +193,7 @@ resource "aws_instance" "worker-2" {
     subnet_id = "subnet-0eafd2692a2da66c5"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-2"
+        Name = "selman-worker-2"
         Project = "tera-kube-ans"
         Role = "worker"
         Id = "2"
